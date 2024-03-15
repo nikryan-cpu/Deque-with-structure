@@ -1,1 +1,45 @@
+#include "Deque23.h"
 
+Student& operator *(const Iterator& a) {
+    Student st{ "",0 };
+    if (a.deque->front + a.index+1 <= a.deque->size)
+        return a.deque->mass[a.deque->front + a.index];
+    else if (a.index+1 > a.deque->real_size) {
+        cout << "Iterator out of range ERROR!"<<endl;
+        return st;
+    }
+    else
+        return a.deque->mass[(a.deque->front + (a.index+1)) % (a.deque->size - 1)];
+}
+
+ostream& operator <<(ostream& out, const Student& a) {
+    out << a.FIO << "  " << a.AverageScore;
+    return out;
+}
+
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    Student student1, student2, student3, student4;
+    student1.FIO = "Н1";
+    student1.AverageScore = 10;
+    student2.FIO = "Н2";
+    student2.AverageScore = 20;
+    student3.FIO = "Н3";
+    student3.AverageScore = 30;
+    student4.FIO = "Н4";
+    student4.AverageScore = 40;
+    Deque23 deque, test;
+    deque.push_front(student1);
+    deque.push_back(student2);
+    deque.push_back(student3);
+    deque.push_back(student4);
+    while (!deque.empty())
+        deque.pop_back();
+    deque.push_back(student2);
+    for (auto i : deque) {
+        cout << i<<endl; 
+    }
+
+
+}
