@@ -1,13 +1,10 @@
 #pragma once
 #include <string>
-using namespace std;
 struct Student {
     string FIO;
     int AverageScore;
 };
-
 class Deque23;
-
 class Iterator {
 public:
     Deque23* deque;
@@ -34,45 +31,9 @@ public:
         return *this;
     }
 
-    Iterator& operator +=(int a) {
-        index += a;
-        return *this;
+    Student& operator *() {
+        return deque->mass[(deque->front + index) % deque->real_size];
     }
-
-    Iterator operator++ (int)
-    {
-        Iterator copy{ *this };
-        ++(*this);
-        return copy;
-    }
-
-    Iterator operator-- (int)
-    {
-        Iterator copy{ *this };
-        --(*this);
-        return copy;
-    }
-
-    Iterator& operator -=(int a) {
-        index -= a;
-        return *this;
-    }
-
-    Iterator& operator +(int& a) {
-        Iterator b;
-        b.deque = this->deque;
-        b.index = this->index + a;
-        return b;
-    }
-
-    Iterator& operator -(int& a) {
-        Iterator b;
-        b.deque = this->deque;
-        b.index = this->index - a;
-        return b;
-    }
-
-    friend Student& operator *(const Iterator& a);
 
     Iterator& operator=(Iterator& a) {
         this->index = a.index;
@@ -90,5 +51,4 @@ public:
         return deque != e16.deque || index != e16.index;
     }
 };
-
 
